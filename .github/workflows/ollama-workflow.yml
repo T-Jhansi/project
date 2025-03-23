@@ -1,0 +1,28 @@
+name: Run Ollama in GitHub Actions (Windows)
+
+on: 
+  push:
+    branches:
+      - main  # Runs when code is pushed to "main" branch
+
+jobs:
+  ollama_job:
+    runs-on: windows-latest  # Runs on Windows VM
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3  # Clones your repo
+
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'  # Installs Python 3.9
+
+      - name: Install Ollama
+        run: pip install ollama  # Installs Ollama
+
+      - name: Start Ollama Server
+        run: start /B ollama serve  # Starts Ollama in the background on Windows
+
+      - name: Run Your Python Script
+        run: python your_script.py  # Replace with your actual script
